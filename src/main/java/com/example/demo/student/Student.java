@@ -1,8 +1,26 @@
 package com.example.demo.student;
+import javax.persistence.*;
 
+//REMEMBER: EVERY TABLE HAVE ONE FILE! ==> 3 TABLE == 3 CLASS FILE with different package
+//convert this class in a database's table
+//when the application will start if the table wasn't in database, the table will create
+@Entity
+@Table
 public class Student {
-    private Long id;
+    //this is for primary key with auto increment
+    @Id
+    @SequenceGenerator(
+            name = "student_sequence",
+            sequenceName = "student_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "student_sequence"
+    )
+    private Long id; //with the annotation @Id this row is a primary key with auto increment was started by 1
     private String name;
+    @Transient //this information will be not in table, this information is only in class
     private int age;
     private String email;
 

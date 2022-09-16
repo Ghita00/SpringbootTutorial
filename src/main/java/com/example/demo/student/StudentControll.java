@@ -1,9 +1,7 @@
 package com.example.demo.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,9 +16,23 @@ public class StudentControll {
         this.studentService = studentService; //not work if i didn't use @Autowired + @Component in the StudentService
     }
 
+    //for write
+    @PostMapping
+    //annonation @RequestBody is used to take the url param
+    public void registerNewStudent(@RequestBody Student student) throws Exception {
+        studentService.addNewStudent(student);
+    }
+
+    //for read
     @GetMapping
     public List<Student> json(){
         //this object is convert in a list of in Json file
         return studentService.getStudent();
+    }
+
+    //for delete
+    @DeleteMapping(path = "{studentId}")
+    public void deleteStudent(@PathVariable("studentId") Long id){
+        studentService.deleteStudent(id);
     }
 }
