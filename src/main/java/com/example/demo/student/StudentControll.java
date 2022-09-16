@@ -32,7 +32,7 @@ public class StudentControll {
 
     //for delete
     @DeleteMapping(path = "{studentId}")
-    public void deleteStudent(@PathVariable("studentId") Long id){
+    public void deleteStudent(@PathVariable("studentId") Long id) throws Exception {
         studentService.deleteStudent(id);
     }
 }
